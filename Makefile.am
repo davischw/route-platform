@@ -5,10 +5,10 @@ SUBDIRS = lib @ZEBRA@ @BGPD@ @RIPD@ @RIPNGD@ @OSPFD@ @OSPF6D@ @BABELD@ \
          redhat @SOLARIS@ tests @FPMD@  @OLSRD@ @ICRPD@ @FRPD@ @AODVD@ @VRRPD@ \
          @LLDPD@  @VPND@ @L2TPD@ @BFDD@ @LDPD@ @RSVPD@  @MPLSD@ @UTILS@ @IMISHD@
 
-DIST_SUBDIRS = lib zebra bgpd ripd ripngd ospfd ospf6d babeld \
-	  isisd watchquagga vtysh ospfclient doc m4 pkgsrc redhat tests \
-	  solaris pimd fpm olsrd icrpd frpd adovd vrrpd lldpd \
-      vpnd vpnd/l2tp bfdd ldpd rsvpd mplsd system-utils imi-cli
+DIST_SUBDIRS = \
+	  lib zebra bgpd ripd ripngd ospfd ospf6d babeld isisd watchquagga \
+	  vtysh ospfclient doc m4 pkgsrc redhat tests solaris pimd fpm olsrd \
+	  icrpd frpd vrrpd lldpd ldpd rsvpd mplsd system-utils imi-cli
 
 EXTRA_DIST = aclocal.m4 SERVICES TODO REPORTING-BUGS INSTALL.quagga.txt \
 	update-autotools \
