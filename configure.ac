@@ -290,8 +290,6 @@ AC_ARG_ENABLE(vrrpd,
   AS_HELP_STRING([--disable-vrrpd], [do not build vrrpd]))
 AC_ARG_ENABLE(icrpd,
   AS_HELP_STRING([--disable-icrpd], [do not build icrpd]))
-AC_ARG_ENABLE(aodvd,
-  AS_HELP_STRING([--disable-aodvd], [do not build aodvd])) 
 AC_ARG_ENABLE(ldpd,
   AS_HELP_STRING([--disable-ldpd], [do not build ldpd]))   
 AC_ARG_ENABLE(rsvpd,
@@ -300,10 +298,6 @@ AC_ARG_ENABLE(lldpd,
   AS_HELP_STRING([--disable-lldpd], [do not build lldpd])) 
 AC_ARG_ENABLE(mplsd,
   AS_HELP_STRING([--disable-mplsd], [do not build mplsd]))  
-AC_ARG_ENABLE(vpnd,
-  AS_HELP_STRING([--disable-vpnd], [do not  vpnd])) 
-AC_ARG_ENABLE(bfdd,
-  AS_HELP_STRING([--disable-bfdd], [do not  bfdd])) 
   AC_ARG_ENABLE(utils,
   AS_HELP_STRING([--enable-utils], [build system utils]))      
 dnl ------------------------------ zhurish
@@ -1614,15 +1608,6 @@ else
 fi
 AM_CONDITIONAL(ICRPD, test "x$ICRPD" = "xicrpd")
 
-if test "${enable_aodvd}" = "yes";then
-  AODVD="aodvd"
-	AC_DEFINE_UNQUOTED(PATH_AODVD_PID, "$quagga_statedir/aodvd.pid",aodvd PID)
-	AC_DEFINE_UNQUOTED(AODV_VTYSH_PATH, "$quagga_statedir/aodvd.vty",aodvd vty socket)  
-else
-  AODVD=""
-fi
-AM_CONDITIONAL(AODVD, test "x$AODVD" = "xadovd")
-
 if test "${enable_vrrpd}" = "yes";then
   VRRPD="vrrpd"
 	AC_DEFINE_UNQUOTED(PATH_VRRPD_PID, "$quagga_statedir/vrrpd.pid",vrrpd PID)
@@ -1675,28 +1660,6 @@ else
 fi
 AM_CONDITIONAL(MPLSD, test "x$MPLSD" = "xmplsd")
 
-if test "${enable_vpnd}" = "yes"; then
-	VPND="vpnd"	
-	L2TPD="vpnd/l2tp"	
-  	AC_DEFINE_UNQUOTED(PATH_VPND_PID, "$quagga_statedir/vpnd.pid",vpnd PID)
-	AC_DEFINE_UNQUOTED(VPN_VTYSH_PATH, "$quagga_statedir/vpnd.vty",vpnd vty socket)
-else  
-	VPND=""	
-	L2TPD=""		
-fi
-AM_CONDITIONAL(VPND, test "x$VPND" = "xvpnd")
-AM_CONDITIONAL(L2TPD, test "x$L2TPD" = "xvpnd")
-
-if test "${enable_bfdd}" = "yes"; then
-	BFDD="bfdd"	
-  	AC_DEFINE_UNQUOTED(PATH_BFDD_PID, "$quagga_statedir/bfdd.pid",bfdd PID)
-	AC_DEFINE_UNQUOTED(BFD_VTYSH_PATH, "$quagga_statedir/bfdd.vty",bfdd vty socket)
-else  
-	BFDD=""		
-fi
-AM_CONDITIONAL(BFDD, test "x$BFDD" = "xbfdd")
-
-
 if test "${enable_utils}" = "yes"; then
 	UTILS="system-utils"	
 	dnl AC_DEFINE(HAVE_VPND_TUNNEL, 1, Enable Tunnel Support)
@@ -1722,12 +1685,9 @@ AC_SUBST(FPMD)
 AC_SUBST(OLSRD)
 AC_SUBST(ICRPD)
 AC_SUBST(FRPD)
-AC_SUBST(AODVD) 
 AC_SUBST(VRRPD)
 AC_SUBST(LLDPD) 
-AC_SUBST(VPND)
 AC_SUBST(L2TPD)
-AC_SUBST(BFDD)
 
 AC_SUBST(LDPD) 
 AC_SUBST(RSVPD) 
@@ -1799,13 +1759,11 @@ AC_CONFIG_FILES([Makefile lib/Makefile zebra/Makefile ripd/Makefile
 	  ripngd/Makefile bgpd/Makefile ospfd/Makefile watchquagga/Makefile
 	  ospf6d/Makefile isisd/Makefile babeld/Makefile vtysh/Makefile
 	  doc/Makefile ospfclient/Makefile tests/Makefile m4/Makefile
-	  pimd/Makefile fpm/Makefile  
-	  
-	  olsrd/Makefile icrpd/Makefile frpd/Makefile adovd/Makefile vrrpd/Makefile 
-	  lldpd/Makefile vpnd/Makefile vpnd/l2tp/Makefile 
-	  bfdd/Makefile ldpd/Makefile rsvpd/Makefile mplsd/Makefile 
+	  pimd/Makefile fpm/Makefile
+	  olsrd/Makefile icrpd/Makefile frpd/Makefile vrrpd/Makefile
+	  lldpd/Makefile
+	  ldpd/Makefile rsvpd/Makefile mplsd/Makefile
 	  system-utils/Makefile imi-cli/Makefile
-	  
 	  tests/bgpd.tests/Makefile 
 	  tests/libzebra.tests/Makefile
 	  redhat/Makefile
